@@ -1,0 +1,29 @@
+{
+  "name": "sus-bot",
+  "version": "1.0.0",
+  "description": "Calls out twitch chatters as being sus or imposter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taskinoz/sus-bot.git"
+  },
+  "keywords": [
+    "sus",
+    "among",
+    "us",
+    "twitch",
+    "nodejs"
+  ],
+  "author": "Tristan Kennedy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/taskinoz/sus-bot/issues"
+  },
+  "homepage": "https://github.com/taskinoz/sus-bot#readme",
+  "dependencies": {
+    "tmi.js": "^1.5.0"
+  }
+}
