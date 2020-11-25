@@ -7,11 +7,26 @@ function rand(r){
 	return Math.floor(Math.random()*r);
 }
 
+function removeItemOnce(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
+
 function joinChannel(channelName) {
 	client.channels.push(channelName);
 	Login.channels.push(channelName);
 	fs.writeFileSync("twitch-login.json",JSON.stringify(Login,null,4));
 	client.join(channelName);
+}
+
+function leaveChannel(channelName) {
+	removeItemOnce(client.channels, channelName);
+	removeItemOnce(Login.channels, channelName);
+	fs.writeFileSync("twitch-login.json",JSON.stringify(Login,null,4));
+	client.part(channelName);
 }
 
 const client = new tmi.Client({
@@ -73,6 +88,8 @@ client.on('message', (channel, tags, message, self) => {
 	// Bot Channel
   // -----------------------
 	if (channel==channel) {
+
+		// !join
 		if (message.toLowerCase() === '!join') {
 			if (!(Login.channels).includes(`#${tags.username}`)) {
 				client.say(channel, `susbot has joined @${tags.username}`);
@@ -80,6 +97,16 @@ client.on('message', (channel, tags, message, self) => {
 			}
 			else {
 				client.say(channel, `@${tags.username}, susbot is already in your channel`);
+			}
+		}
+		// !leave
+		if (message.toLowerCase() === '!leave') {
+			if ((Login.channels).includes(`#${tags.username}`)) {
+				client.say(channel, `@${tags.username} susbot has left your channel`);
+				leaveChannel(`#${tags.username}`)
+			}
+			else {
+				client.say(channel, `@${tags.username}, susbot isn't in your channel`);
 			}
 		}
 	}
