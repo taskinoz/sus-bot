@@ -87,7 +87,7 @@ client.on('message', (channel, tags, message, self) => {
 
 	// Bot Channel
   // -----------------------
-	if (channel==channel) {
+	if (channel=="#"+Login.username) {
 
 		// !join
 		if (message.toLowerCase() === '!join') {
